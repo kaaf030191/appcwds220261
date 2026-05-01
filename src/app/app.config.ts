@@ -3,11 +3,14 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideApiConfiguration } from './api/api-configuration';
+import { environment } from './environments/environments';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideBrowserGlobalErrorListeners(),
 		provideRouter(routes),
-		provideHttpClient()
+		provideHttpClient(),
+		provideApiConfiguration(environment.urlBase)
 	]
 };

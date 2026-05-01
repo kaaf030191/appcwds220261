@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GeneralService } from './api/general-service';
+import { Api } from './api/api';
+import { apigeneralindex } from './api/functions';
 
 @Component({
 	selector: 'app-root',
@@ -11,17 +12,15 @@ import { GeneralService } from './api/general-service';
 
 export class App {
 	constructor(
-		private generalService: GeneralService
+		private api: Api
 	) {}
 
 	ngOnInit(): void {
-		this.generalService.getIndex().subscribe({
-			next: (resposne: any) => {
-				console.log(resposne);
-			},
-			error: (error: any) => {
-				console.log(error);
-			}
+		this.api.invoke(apigeneralindex).then((response: any) => {
+			const apiResponseData = typeof response === 'string' ? JSON.parse(response) : response;
+			console.log(apiResponseData);
+		}).catch((error: any) => {
+			console.log(error);
 		});
 	}
 }
