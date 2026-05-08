@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Api } from './api/api';
 import { apigeneralindex } from './api/functions';
@@ -10,9 +10,9 @@ import { apigeneralindex } from './api/functions';
 	styleUrl: './app.css'
 })
 
-export class App {
+export class App implements OnInit {
 	constructor(
-		private api: Api
+		private readonly api: Api
 	) {}
 
 	ngOnInit(): void {
