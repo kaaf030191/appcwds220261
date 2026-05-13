@@ -1,0 +1,23 @@
+<div class="card w-full p-4">
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+		<div class="flex flex-col gap-2">
+			<label for="txtFullName" class="font-medium">Nombre completo de quien sugiere</label>
+			<input pInputText id="txtFullName" class="w-full"/>
+			<small style="display: none;" class="text-gray-500">Enter your username to reset your password.</small>
+		</div>
+		<div class="flex flex-col gap-2">
+			<label for="txtIdOffice" class="font-medium">Oficina*</label>
+			<input pInputText id="txtIdOffice" readonly class="w-full" />
+		</div>
+	</div>
+	<div class="grid grid-cols-1 gap-4 mb-3">
+		<div class="flex flex-col gap-2">
+			<label for="txtIdOffice" class="font-medium">Descripción de la sugerencia*</label>
+			<textarea pTextarea rows="5" class="w-full"></textarea>
+		</div>
+	</div>
+	<hr>
+	<div class="card flex justify-end mt-3">
+		<p-button label="Registrar datos ingresados" />
+	</div>
+</div>
