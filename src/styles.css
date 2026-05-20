@@ -1,2 +1,6 @@
 @import "primeicons/primeicons.css";
 @import "tailwindcss";
+
+.errorMessage {
+    color: red;
+}

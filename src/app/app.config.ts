@@ -9,7 +9,7 @@ import { providePrimeNG } from 'primeng/config';
 
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 const MyCustomPreset = definePreset(Aura, {
     semantic: {
@@ -43,6 +43,7 @@ export const appConfig: ApplicationConfig = {
 				}
             }
         }),
-		MessageService
+		MessageService,
+        ConfirmationService
 	]
 };

@@ -11,6 +11,8 @@ import { RequestBuilder } from '../../request-builder';
 export interface Apisuggestioninsert$Params {
       body?: {
 'description'?: string;
+'files[0]'?: Blob;
+'files[1]'?: Blob;
 'idOffice'?: string;
 'personFullName'?: string;
 }
@@ -19,7 +21,7 @@ export interface Apisuggestioninsert$Params {
 export function apisuggestioninsert(http: HttpClient, rootUrl: string, params?: Apisuggestioninsert$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
   const rb = new RequestBuilder(rootUrl, apisuggestioninsert.PATH, 'post');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.body(params.body, 'multipart/form-data');
   }
 
   return http.request(

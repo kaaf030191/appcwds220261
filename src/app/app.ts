@@ -8,6 +8,7 @@ import { MenuModule } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
 	selector: 'app-root',
@@ -20,7 +21,8 @@ import { ToastModule } from 'primeng/toast';
 		DrawerModule,
 		MenuModule,
 		AvatarModule,
-		ToastModule
+		ToastModule,
+		ConfirmDialogModule
 	],
 	templateUrl: './app.html',
 	styleUrls: ['./app.css']
