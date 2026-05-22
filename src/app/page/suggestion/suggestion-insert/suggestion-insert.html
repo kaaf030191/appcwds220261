@@ -1,12 +1,9 @@
-<div class="card w-full p-4">
+<div class="card bg-white shadow-sm rounded-lg w-full p-4">
 	<form [formGroup]="frmInsertSuggestion">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
 			<div class="flex flex-col gap-2">
 				<label for="txtPersonFullName" class="font-medium">Nombre completo de quien sugiere</label>
 				<input pInputText id="txtPersonFullName" formControlName="personFullName" class="w-full"/>
-				@if((personFullNameFb.touched || personFullNameFb.dirty) && personFullNameFb.errors && personFullNameFb.hasError('required')) {
-					<small class="errorMessage">Campo requerido.</small>
-				}
 			</div>
 			<div class="flex flex-col gap-2">
 				<label for="txtIdOffice" class="font-medium">Oficina*</label>
@@ -22,9 +19,24 @@
 				}
 			</div>
 		</div>
+		<div class="gap-4 mb-3">
+			<p-button label="Agregar evidencia" (click)="addFile()" />&nbsp;&nbsp;<label style="color: #999999;text-shadow: 0px 0px 1px">Datos opcionales</label>
+		</div>
+		<div class="gap-4 mb-3">
+			<table class="w-full">
+				<tbody>
+				@for(value of fileRowList; track value.id) {
+					<tr>
+						<td><p-fileUpload mode="basic" [chooseLabel]="'Seleccionar archivo [' + value.id + ']'" styleClass="text-xs py-1 px-3 rounded-lg" (onSelect)="onFileSelect($event, value.id)" /></td>
+						<td class="text-right"><p-button label="Retirar" severity="danger" (click)="removeFile(value)" /></td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		</div>
 		<hr>
 		<div class="card flex justify-end mt-3">
-			<p-button label="Registrar datos ingresados" (click)="sendInsertSuggestion($event)" />
+			<p-button label="Registrar datos ingresados" severity="info" (click)="sendInsertSuggestion($event)" />
 		</div>
 	</form>
 </div>

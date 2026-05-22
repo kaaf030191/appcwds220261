@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
 import { Api } from '../../../api/api';
 import { apisuggestioninsert, Apisuggestioninsert$Params } from '../../../api/functions';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -14,7 +15,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 		ReactiveFormsModule,
 		InputTextModule,
 		TextareaModule,
-		ButtonModule
+		ButtonModule,
+		FileUploadModule
 	],
 	templateUrl: './suggestion-insert.html',
 	styleUrl: './suggestion-insert.css',
@@ -26,6 +28,10 @@ export class SuggestionInsert {
 
 	frmInsertSuggestion: FormGroup;
 
+	fileQuantity: number = 0;
+	fileRowList: any[] = [];
+	listFile: any[] = [];
+
 	get personFullNameFb() { return this.frmInsertSuggestion.controls['personFullName']; }
 	get idOfficeFb() { return this.frmInsertSuggestion.controls['idOffice']; }
 	get descriptionFb() { return this.frmInsertSuggestion.controls['description']; }
@@ -35,10 +41,55 @@ export class SuggestionInsert {
 		private api: Api
 	) {
 		this.frmInsertSuggestion = this.formBuilder.group({
-			'personFullName': ['', [Validators.required]],
+			'personFullName': ['', []],
 			'idOffice': ['', []],
 			'description': ['', [Validators.required]]
 		});
+	}
+
+	addFile(): void {
+		this.fileQuantity++;
+
+		this.fileRowList.push({
+			'id': 'file' + this.fileQuantity
+		});
+	}
+
+	removeFile(element: any): void {
+		let tempElement = JSON.parse(JSON.stringify(element));
+
+		let positionTemp = this.fileRowList.indexOf(element);
+
+		this.fileRowList.splice(positionTemp, 1);
+
+		let indexTemp = 0;
+
+		this.listFile.every((value) => {
+			if(value.name == tempElement.id) {
+				return false;
+			}
+
+			indexTemp++;
+
+			return true;
+		});
+
+		alert('asd');
+
+		this.listFile.splice(indexTemp, 1);
+
+		console.log(this.listFile);
+	}
+
+	onFileSelect(event: any, name: string): void {
+		const file = event.currentFiles ? event.currentFiles[0] : event.files[0];
+
+		this.listFile.push({
+			'name': name,
+			'file': file
+		});
+
+		console.log(this.listFile);
 	}
 
 	sendInsertSuggestion(event: Event): void {
