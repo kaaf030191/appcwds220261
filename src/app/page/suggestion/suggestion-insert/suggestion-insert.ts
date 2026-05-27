@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SelectModule } from 'primeng/select';
 import { Api } from '../../../api/api';
-import { apisuggestioninsert, Apisuggestioninsert$Params } from '../../../api/functions';
+import { apiofficegetall, apisuggestioninsert, Apisuggestioninsert$Params } from '../../../api/functions';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -16,24 +17,27 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 		InputTextModule,
 		TextareaModule,
 		ButtonModule,
-		FileUploadModule
+		FileUploadModule,
+		SelectModule
 	],
 	templateUrl: './suggestion-insert.html',
 	styleUrl: './suggestion-insert.css',
 })
 
-export class SuggestionInsert {
+export class SuggestionInsert implements OnInit {
 	private confirmationService = inject(ConfirmationService);
 	private messageService = inject(MessageService);
 
 	frmInsertSuggestion: FormGroup;
+
+	listOffice: any[] = [];
 
 	fileQuantity: number = 0;
 	fileRowList: any[] = [];
 	listFile: any[] = [];
 
 	get personFullNameFb() { return this.frmInsertSuggestion.controls['personFullName']; }
-	get idOfficeFb() { return this.frmInsertSuggestion.controls['idOffice']; }
+	get officeFb() { return this.frmInsertSuggestion.controls['office']; }
 	get descriptionFb() { return this.frmInsertSuggestion.controls['description']; }
 
 	constructor(
@@ -42,8 +46,20 @@ export class SuggestionInsert {
 	) {
 		this.frmInsertSuggestion = this.formBuilder.group({
 			'personFullName': ['', []],
-			'idOffice': ['', []],
+			'office': ['', [Validators.required]],
 			'description': ['', [Validators.required]]
+		});
+	}
+
+	ngOnInit(): void {
+		this.initialization();
+	}
+
+	private initialization(): void {
+		this.api.invoke(apiofficegetall).then((response: any) => {
+			const apiResponseData = typeof response === 'string' ? JSON.parse(response) : response;
+
+			this.listOffice = apiResponseData.listOffice;
 		});
 	}
 
@@ -74,22 +90,16 @@ export class SuggestionInsert {
 			return true;
 		});
 
-		alert('asd');
-
 		this.listFile.splice(indexTemp, 1);
-
-		console.log(this.listFile);
 	}
 
 	onFileSelect(event: any, name: string): void {
-		const file = event.currentFiles ? event.currentFiles[0] : event.files[0];
+		const file: Blob = event.currentFiles ? event.currentFiles[0] : event.files[0];
 
 		this.listFile.push({
 			'name': name,
 			'file': file
 		});
-
-		console.log(this.listFile);
 	}
 
 	sendInsertSuggestion(event: Event): void {
@@ -117,13 +127,19 @@ export class SuggestionInsert {
 				label: 'Aceptar',
 				severity: 'primary'
 			},
-		
 			accept: () => {
+				let filesToSend: Blob[] = [];
+
+				this.listFile.forEach((element: any) => {
+					filesToSend.push(element.file);
+				});
+
 				const bodyParams: Apisuggestioninsert$Params = {
 					body: {
-						idOffice: 'f884319e-123d-4fd1-8e80-fd26be9101ed',
+						idOffice: this.officeFb.value.idOffice,
 						personFullName: this.personFullNameFb.value,
-						description: this.descriptionFb.value
+						description: this.descriptionFb.value,
+						files: filesToSend
 					}
 				};
 

@@ -5,3 +5,5 @@ export type { Apigeneralindex$Params as Apigeneralindex$Params } from './fn/oper
 export { apigeneralindex as apigeneralindex } from './fn/operations/apigeneralindex';
 export type { Apisuggestioninsert$Params as Apisuggestioninsert$Params } from './fn/operations/apisuggestioninsert';
 export { apisuggestioninsert as apisuggestioninsert } from './fn/operations/apisuggestioninsert';
+export type { Apiofficegetall$Params as Apiofficegetall$Params } from './fn/operations/apiofficegetall';
+export { apiofficegetall as apiofficegetall } from './fn/operations/apiofficegetall';

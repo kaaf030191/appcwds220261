@@ -6,8 +6,11 @@
 				<input pInputText id="txtPersonFullName" formControlName="personFullName" class="w-full"/>
 			</div>
 			<div class="flex flex-col gap-2">
-				<label for="txtIdOffice" class="font-medium">Oficina*</label>
-				<input pInputText id="txtIdOffice" formControlName="idOffice" readonly class="w-full" />
+				<label for="selectOffice" class="font-medium">Oficina*</label>
+				<p-select [options]="listOffice" id="selectOffice" formControlName="office" optionLabel="name" placeholder="Seleccione una oficina" class="w-full" />
+				@if((officeFb.touched || officeFb.dirty) && officeFb.errors && officeFb.hasError('required')) {
+					<small class="errorMessage">Campo requerido.</small>
+				}
 			</div>
 		</div>
 		<div class="grid grid-cols-1 gap-4 mb-3">
@@ -27,7 +30,7 @@
 				<tbody>
 				@for(value of fileRowList; track value.id) {
 					<tr>
-						<td><p-fileUpload mode="basic" [chooseLabel]="'Seleccionar archivo [' + value.id + ']'" styleClass="text-xs py-1 px-3 rounded-lg" (onSelect)="onFileSelect($event, value.id)" /></td>
+						<td><p-fileUpload mode="basic" chooseLabel="Seleccionar archivo" styleClass="text-xs py-1 px-3 rounded-lg" (onSelect)="onFileSelect($event, value.id)" /></td>
 						<td class="text-right"><p-button label="Retirar" severity="danger" (click)="removeFile(value)" /></td>
 					</tr>
 				}

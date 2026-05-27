@@ -8,19 +8,12 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface Apisuggestioninsert$Params {
-      body?: {
-'description'?: string;
-'files'?: Blob[];
-'idOffice'?: string;
-'personFullName'?: string;
-}
+export interface Apiofficegetall$Params {
 }
 
-export function apisuggestioninsert(http: HttpClient, rootUrl: string, params?: Apisuggestioninsert$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, apisuggestioninsert.PATH, 'post');
+export function apiofficegetall(http: HttpClient, rootUrl: string, params?: Apiofficegetall$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, apiofficegetall.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'multipart/form-data');
   }
 
   return http.request(
@@ -33,4 +26,4 @@ export function apisuggestioninsert(http: HttpClient, rootUrl: string, params?: 
   );
 }
 
-apisuggestioninsert.PATH = '/suggestion/insert';
+apiofficegetall.PATH = '/office/getall';
