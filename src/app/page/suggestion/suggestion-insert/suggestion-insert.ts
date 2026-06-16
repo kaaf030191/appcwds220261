@@ -29,6 +29,7 @@ export class SuggestionInsert implements OnInit {
 	private messageService = inject(MessageService);
 
 	frmInsertSuggestion: FormGroup;
+	frmInsertSuggestionInitValue: any = {};
 
 	listOffice: any[] = [];
 
@@ -44,10 +45,16 @@ export class SuggestionInsert implements OnInit {
 		private formBuilder: FormBuilder,
 		private api: Api
 	) {
+		this.frmInsertSuggestionInitValue = {
+			'personFullName': '',
+			'office': '',
+			'description': ''
+		};
+
 		this.frmInsertSuggestion = this.formBuilder.group({
-			'personFullName': ['', []],
-			'office': ['', [Validators.required]],
-			'description': ['', [Validators.required]]
+			'personFullName': [this.frmInsertSuggestionInitValue.personFullName, []],
+			'office': [this.frmInsertSuggestionInitValue.office, [Validators.required]],
+			'description': [this.frmInsertSuggestionInitValue.description, [Validators.required]]
 		});
 	}
 
@@ -148,6 +155,13 @@ export class SuggestionInsert implements OnInit {
 					switch(apiResponseData.type) {
 						case 'success':
 							this.messageService.add({ severity: 'success', summary: 'Correcto', detail: apiResponseData.listMessage[0] });
+
+							this.fileQuantity = 0;
+							this.fileRowList = [];
+							this.listFile = [];
+
+							this.frmInsertSuggestion.reset(this.frmInsertSuggestionInitValue);
+
 							break;
 						
 						case 'warning':

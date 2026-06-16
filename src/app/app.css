@@ -20,12 +20,17 @@
 	align-items: center;
 	padding: 0 1.5rem;
 	z-index: 999;
+	gap: 1.5rem;
 }
 
 .topbar-left, .topbar-right {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+}
+
+.topbar-left {
+	flex: 1;
 }
 
 .app-logo {
@@ -105,4 +110,64 @@
 .active-link {
 	background-color: #0f172a !important;
 	color: #ffffff !important;
+}
+
+.topbar-menu {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	margin-left: 2rem;
+}
+
+.topbar-menu a {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	padding: 0.6rem 1rem;
+
+	text-decoration: none;
+	color: #475569;
+
+	font-size: 0.9rem;
+	font-weight: 500;
+
+	border-radius: 8px;
+
+	transition:
+		background-color 0.2s,
+		color 0.2s;
+}
+
+.topbar-menu a:hover {
+	background-color: #f1f5f9;
+	color: #0f172a;
+}
+
+.topbar-menu a i {
+	font-size: 0.9rem;
+}
+
+.active-menu {
+	background-color: #0f172a;
+	color: #ffffff !important;
+}
+
+.active-menu i {
+	color: #ffffff;
+}
+
+.user-profile i {
+	font-size: 0.8rem;
+	color: #64748b;
+}
+
+@media (max-width: 992px) {
+	.topbar-menu {
+		display: none;
+	}
+
+	.username {
+		display: none;
+	}
 }
