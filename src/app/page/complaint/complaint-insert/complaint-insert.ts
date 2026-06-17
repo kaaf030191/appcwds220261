@@ -10,6 +10,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { Api } from '../../../api/api';
 import { apiofficegetall, apicomplaintinsert, Apicomplaintinsert$Params, apiprofessorgetall } from '../../../api/functions';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { OptionMenuService } from '../../../observable/option-menu/option-menu.service';
 
 @Component({
 	selector: 'app-complaint-insert',
@@ -31,6 +32,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class ComplaintInsert implements OnInit {
 	private confirmationService = inject(ConfirmationService);
 	private messageService = inject(MessageService);
+	private optionMenuService = inject(OptionMenuService);
 
 	frmInsertComplaint: FormGroup;
 
@@ -78,6 +80,8 @@ export class ComplaintInsert implements OnInit {
 	}
 
 	private initialization(): void {
+		this.optionMenuService.sendData("complaintinsert");
+
 		this.api.invoke(apiofficegetall).then((response: any) => {
 			const apiResponseData = typeof response === 'string' ? JSON.parse(response) : response;
 

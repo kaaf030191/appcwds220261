@@ -11,25 +11,14 @@
 
 		<!-- Menú principal -->
 		<nav class="topbar-menu">
-			<a routerLink="/">
-				<i class="pi pi-home"></i>
-				<span>Inicio</span>
-			</a>
-
-			<a routerLink="/suggestion/insert">
-				<i class="pi pi-bookmark"></i>
-				<span>Sugerencias</span>
-			</a>
-
-			<a routerLink="/complaint/insert">
-				<i class="pi pi-shield"></i>
-				<span>Quejas</span>
-			</a>
-
-			<a routerLink="/followup">
-				<i class="pi pi-book"></i>
-				<span>Seguimiento</span>
-			</a>
+			@for(value of menuOptions; track value.route) {
+				<a [routerLink]="value.route" [ngClass]="{
+					'active-menu': value.active
+				}">
+					<i class="pi pi-{{value.icon}}"></i>
+					<span>{{value.text}}</span>
+				</a>
+			}
 		</nav>
 
 		<!-- Opciones usuario -->

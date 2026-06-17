@@ -8,6 +8,7 @@ import { SelectModule } from 'primeng/select';
 import { Api } from '../../../api/api';
 import { apiofficegetall, apisuggestioninsert, Apisuggestioninsert$Params } from '../../../api/functions';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { OptionMenuService } from '../../../observable/option-menu/option-menu.service';
 
 @Component({
 	selector: 'app-suggestion-insert',
@@ -27,6 +28,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class SuggestionInsert implements OnInit {
 	private confirmationService = inject(ConfirmationService);
 	private messageService = inject(MessageService);
+	private optionMenuService = inject(OptionMenuService);
 
 	frmInsertSuggestion: FormGroup;
 	frmInsertSuggestionInitValue: any = {};
@@ -63,6 +65,8 @@ export class SuggestionInsert implements OnInit {
 	}
 
 	private initialization(): void {
+		this.optionMenuService.sendData("suggestioninsert");
+
 		this.api.invoke(apiofficegetall).then((response: any) => {
 			const apiResponseData = typeof response === 'string' ? JSON.parse(response) : response;
 
