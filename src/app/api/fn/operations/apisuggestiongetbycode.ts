@@ -8,22 +8,14 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface Apicomplaintinsert$Params {
-      body?: {
-'complaintFullName'?: string;
-'description'?: string;
-'files'?: Blob[];
-'idOffice'?: string;
-'idProfessor'?: string;
-'issueDate'?: string;
-'personFullName'?: string;
-}
+export interface Apisuggestiongetbycode$Params {
+  code: string;
 }
 
-export function apicomplaintinsert(http: HttpClient, rootUrl: string, params?: Apicomplaintinsert$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, apicomplaintinsert.PATH, 'post');
+export function apisuggestiongetbycode(http: HttpClient, rootUrl: string, params: Apisuggestiongetbycode$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, apisuggestiongetbycode.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'multipart/form-data');
+    rb.path('code', params.code, {});
   }
 
   return http.request(
@@ -36,4 +28,4 @@ export function apicomplaintinsert(http: HttpClient, rootUrl: string, params?: A
   );
 }
 
-apicomplaintinsert.PATH = '/complaint/insert';
+apisuggestiongetbycode.PATH = '/suggestion/getbycode/{code}';

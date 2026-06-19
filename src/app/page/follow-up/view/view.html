@@ -1,34 +1,43 @@
 <div class="custom-timeline-wrapper">
-	<h3 class="custom-timeline-title">Estado del trámite</h3>
-	<div class="custom-timeline">
-		<div class="custom-timeline-progress" style="background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 20%, #22a65e 20%, #22a65e 40%, #dc2626 40%, #dc2626 60%, #e68a2e 60%, #e68a2e 80%, #6b7280 80%, #6b7280 100%);"></div>
-		<div class="custom-timeline-item active">
-			<div class="custom-timeline-dot"><span>1</span></div>
-			<div class="custom-timeline-label">Pendiente de revisión</div>
-		</div>
-		<div class="custom-timeline-item">
-			<div class="custom-timeline-dot"><span>2</span></div>
-			<div class="custom-timeline-label">Visto</div>
-		</div>
-		<div class="custom-timeline-item">
-			<div class="custom-timeline-dot"><span>3</span></div>
-			<div class="custom-timeline-label">Rechazado</div>
-		</div>
-		<div class="custom-timeline-item">
-			<div class="custom-timeline-dot"><span>4</span></div>
-			<div class="custom-timeline-label">En coordinación</div>
-		</div>
-		<div class="custom-timeline-item">
-			<div class="custom-timeline-dot"><span>5</span></div>
-			<div class="custom-timeline-label">Cerrado</div>
-		</div>
+	<h3 class="custom-timeline-title">Estado de la queja o sugerencia</h3>
+	<div class="text-center pt-10 pb-10">
+		<form [formGroup]="frmFollowUp">
+			<div>
+				<div class="m-2 mb-7" style="display: inline-block;">
+					<p-radiobutton inputId="radioSuggestion" formControlName="type" value="suggestion" (change)="onChangeType()" />
+					<label for="radioSuggestion" class="ml-2">Sugerencia</label>
+				</div>
+				<div class="m-2 mb-7" style="display: inline-block;">
+					<p-radiobutton inputId="radioComplaint" formControlName="type" value="complaint" (change)="onChangeType()" />
+					<label for="radioComplaint" class="ml-2">Queja</label>
+				</div>
+			</div>
+			<input pInputText pInputMask="*******" id="txtCode" formControlName="code" class="text-center" placeholder="XYZ1237" (keyup)="onKeyUpTxtCode()" />
+		</form>
 	</div>
-	<div class="custom-timeline-legend">
-		<span><span class="legend-dot" style="background:#3b82f6;"></span> Pendiente</span>
-		<span><span class="legend-dot" style="background:#22a65e;"></span> Visto</span>
-		<span><span class="legend-dot" style="background:#dc2626;"></span> Rechazado</span>
-		<span><span class="legend-dot" style="background:#e68a2e;"></span> Coordinación</span>
-		<span><span class="legend-dot" style="background:#6b7280;"></span> Cerrado</span>
-		<span class="legend-active"><span class="legend-dot" style="background:#3b82f6; border:2px solid #1e4f9e;"></span> Activo: Pendiente</span>
-	</div>
+	@if(dataReponse.status != null) {
+		<div class="custom-timeline">
+			<div class="custom-timeline-progress" style="background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 20%, #22a65e 20%, #22a65e 40%, #dc2626 40%, #dc2626 60%, #e68a2e 60%, #e68a2e 80%, #6b7280 80%, #6b7280 100%);"></div>
+			<div class="custom-timeline-item active">
+				<div class="custom-timeline-dot"><span>1</span></div>
+				<div class="custom-timeline-label">Pendiente de revisión</div>
+			</div>
+			<div class="custom-timeline-item">
+				<div class="custom-timeline-dot"><span>2</span></div>
+				<div class="custom-timeline-label">Visto</div>
+			</div>
+			<div class="custom-timeline-item">
+				<div class="custom-timeline-dot"><span>3</span></div>
+				<div class="custom-timeline-label">Rechazado</div>
+			</div>
+			<div class="custom-timeline-item">
+				<div class="custom-timeline-dot"><span>4</span></div>
+				<div class="custom-timeline-label">En coordinación</div>
+			</div>
+			<div class="custom-timeline-item">
+				<div class="custom-timeline-dot"><span>5</span></div>
+				<div class="custom-timeline-label">Cerrado</div>
+			</div>
+		</div>
+	}
 </div>

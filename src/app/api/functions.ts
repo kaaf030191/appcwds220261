@@ -9,5 +9,7 @@ export type { Apicomplaintinsert$Params as Apicomplaintinsert$Params } from './f
 export { apicomplaintinsert as apicomplaintinsert } from './fn/operations/apicomplaintinsert';
 export type { Apiofficegetall$Params as Apiofficegetall$Params } from './fn/operations/apiofficegetall';
 export { apiofficegetall as apiofficegetall } from './fn/operations/apiofficegetall';
+export type { Apisuggestiongetbycode$Params as Apisuggestiongetbycode$Params } from './fn/operations/apisuggestiongetbycode';
+export { apisuggestiongetbycode as apisuggestiongetbycode } from './fn/operations/apisuggestiongetbycode';
 export type { Apiprofessorgetall$Params as Apiprofessorgetall$Params } from './fn/operations/apiprofessorgetall';
 export { apiprofessorgetall as apiprofessorgetall } from './fn/operations/apiprofessorgetall';
