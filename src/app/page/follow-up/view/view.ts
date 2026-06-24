@@ -7,6 +7,8 @@ import { Api } from '../../../api/api';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { apisuggestiongetbycode } from '../../../api/functions';
 import { MessageService } from 'primeng/api';
+import { NgClass } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
 	selector: 'app-follow-up-view',
@@ -15,8 +17,10 @@ import { MessageService } from 'primeng/api';
 		ReactiveFormsModule,
 		InputTextModule,
 		InputMaskModule,
-		RadioButtonModule
-	],
+		RadioButtonModule,
+		ButtonModule,
+		NgClass
+],
 	templateUrl: './view.html',
 	styleUrl: './view.css',
 })
@@ -55,13 +59,18 @@ export class FollowUpView implements OnInit {
 	}
 
 	onChangeType(): void {
-		this.onKeyUpTxtCode();
+		this.getDataSuggestionComplaint();
 	}
 
-	onKeyUpTxtCode(): void {
-		if(this.codeFb.value.replace('_', '').length == 7) {
-			this.api.invoke(apisuggestiongetbycode, { code: this.codeFb.value }).then((response: any) => {
+	getDataSuggestionComplaint(): void {
+		this.dataReponse = null;
+
+		let codeValue = this.codeFb.value.replaceAll('_', '');
+
+		if(codeValue.length == 7 && this.typeFb.value == 'suggestion') {
+			this.api.invoke(apisuggestiongetbycode, { code: codeValue }).then((response: any) => {
 				const apiResponseData = typeof response === 'string' ? JSON.parse(response) : response;
+
 				switch(apiResponseData.type) {
 					case 'success':
 						this.dataReponse = apiResponseData;
@@ -84,5 +93,9 @@ export class FollowUpView implements OnInit {
 				this.messageService.add({ severity: 'error', summary: 'Exception', detail: 'Algo ocurrió mal.' });
 			});
 		}
+	}
+
+	showTimeLine(): boolean {
+		return this.dataReponse != null && this.dataReponse.status != null && this.codeFb.value.replaceAll('_', '').length == 7
 	}
 }

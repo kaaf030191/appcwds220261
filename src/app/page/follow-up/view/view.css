@@ -83,6 +83,12 @@
 	color: #374151;
 }
 
+.custom-timeline-item .custom-timeline-dot-active {
+	border-color: #ffffff !important;
+	background: #3a6dba !important;
+	color: #ffffff !important;
+}
+
 /* Estado activo */
 .custom-timeline-item.active .custom-timeline-dot {
 	box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.15), 0 6px 14px rgba(0,0,0,0.08);

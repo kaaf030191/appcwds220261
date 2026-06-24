@@ -12,30 +12,31 @@
 					<label for="radioComplaint" class="ml-2">Queja</label>
 				</div>
 			</div>
-			<input pInputText pInputMask="*******" id="txtCode" formControlName="code" class="text-center" placeholder="XYZ1237" (keyup)="onKeyUpTxtCode()" />
+			<input pInputText pInputMask="*******" id="txtCode" formControlName="code" class="text-center" placeholder="XYZ1237" />
+			<p-button label="Buscar" severity="info" class="ml-2" (click)="getDataSuggestionComplaint()" />
 		</form>
 	</div>
-	@if(dataReponse.status != null) {
+	@if(showTimeLine()) {
 		<div class="custom-timeline">
 			<div class="custom-timeline-progress" style="background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 20%, #22a65e 20%, #22a65e 40%, #dc2626 40%, #dc2626 60%, #e68a2e 60%, #e68a2e 80%, #6b7280 80%, #6b7280 100%);"></div>
-			<div class="custom-timeline-item active">
-				<div class="custom-timeline-dot"><span>1</span></div>
+			<div class="custom-timeline-item" [ngClass]="{ 'active': dataReponse.status == 'Pendiente de revisión' }">
+				<div class="custom-timeline-dot" [ngClass]="{ 'custom-timeline-dot-active': dataReponse.status == 'Pendiente de revisión' }"><span>1</span></div>
 				<div class="custom-timeline-label">Pendiente de revisión</div>
 			</div>
-			<div class="custom-timeline-item">
-				<div class="custom-timeline-dot"><span>2</span></div>
+			<div class="custom-timeline-item" [ngClass]="{ 'active': dataReponse.status == 'Visto' }">
+				<div class="custom-timeline-dot" [ngClass]="{ 'custom-timeline-dot-active': dataReponse.status == 'Visto' }"><span>2</span></div>
 				<div class="custom-timeline-label">Visto</div>
 			</div>
-			<div class="custom-timeline-item">
-				<div class="custom-timeline-dot"><span>3</span></div>
+			<div class="custom-timeline-item" [ngClass]="{ 'active': dataReponse.status == 'Rechazado' }">
+				<div class="custom-timeline-dot" [ngClass]="{ 'custom-timeline-dot-active': dataReponse.status == 'Rechazado' }"><span>3</span></div>
 				<div class="custom-timeline-label">Rechazado</div>
 			</div>
-			<div class="custom-timeline-item">
-				<div class="custom-timeline-dot"><span>4</span></div>
+			<div class="custom-timeline-item" [ngClass]="{ 'active': dataReponse.status == 'En coordinación' }">
+				<div class="custom-timeline-dot" [ngClass]="{ 'custom-timeline-dot-active': dataReponse.status == 'En coordinación' }"><span>4</span></div>
 				<div class="custom-timeline-label">En coordinación</div>
 			</div>
-			<div class="custom-timeline-item">
-				<div class="custom-timeline-dot"><span>5</span></div>
+			<div class="custom-timeline-item" [ngClass]="{ 'active': dataReponse.status == 'Cerrado' }">
+				<div class="custom-timeline-dot" [ngClass]="{ 'custom-timeline-dot-active': dataReponse.status == 'Cerrado' }"><span>5</span></div>
 				<div class="custom-timeline-label">Cerrado</div>
 			</div>
 		</div>
